@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "net.kyori"
-version = "1.3.2-SNAPSHOT"
+version = "1.3.2"
 description = "Gradle plugin for performing source code token replacements in Java, Kotlin, Scala, and Groovy based projects"
 
 repositories {
@@ -45,4 +45,33 @@ indraPluginPublishing {
     listOf("blossom", "replacement")
   )
   website("https://github.com/KyoriPowered/blossom")
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "releases"
+      url = uri("https://repo.polyfrost.cc/releases")
+      credentials(PasswordCredentials::class)
+      authentication {
+        create<BasicAuthentication>("basic")
+      }
+    }
+    maven {
+      name = "snapshots"
+      url = uri("https://repo.polyfrost.cc/snapshots")
+      credentials(PasswordCredentials::class)
+      authentication {
+        create<BasicAuthentication>("basic")
+      }
+    }
+    maven {
+      name = "private"
+      url = uri("https://repo.polyfrost.cc/private")
+      credentials(PasswordCredentials::class)
+      authentication {
+        create<BasicAuthentication>("basic")
+      }
+    }
+  }
 }
